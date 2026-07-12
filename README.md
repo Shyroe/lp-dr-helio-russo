@@ -1,35 +1,34 @@
 # Dr. Hélio Russo — Landing Page
 
-Recriação frontend **pixel-perfect** de uma landing page odontológica, desenvolvida como projeto de portfólio com uma stack React moderna.
-
-> Projeto educacional e de portfólio. Não é o site oficial do Dr. Hélio Russo e não possui vínculo com o profissional ou com o site de referência.
+Landing page odontológica responsiva desenvolvida como projeto de portfólio com uma stack frontend moderna, foco em fidelidade visual, acessibilidade, desempenho e qualidade de implementação.
 
 ## Stack
 
 - TanStack Start e TanStack Router
 - React 19 e TypeScript
-- Tailwind CSS v4, com abordagem Tailwind-first
+- Tailwind CSS v4 com abordagem Tailwind-first
 - shadcn/ui e Radix UI
-- Motion (`motion/react-mini`) para entrance animations
+- Motion (`motion/react-mini`)
 - Embla Carousel
 - Biome
 - Playwright e ImageMagick para auditorias visuais
 
-## Principais características
+## Recursos
 
 - nove seções responsivas;
-- recriação visual validada em desktop, tablet e mobile;
-- animações de entrada equivalentes à referência;
-- Carousel de depoimentos e FAQ interativa;
-- suporte a `prefers-reduced-motion`;
-- acessibilidade e navegação por teclado;
+- layouts específicos para desktop, tablet e mobile;
+- entrance animations com suporte a `prefers-reduced-motion`;
+- Carousel de depoimentos;
+- FAQ interativa;
+- navegação por teclado e melhorias de acessibilidade;
 - assets locais;
-- SSR compatível com TanStack Start;
-- estrutura preparada para publicação como Cloudflare Workers Static Assets.
+- SSR com TanStack Start;
+- estrutura preparada para Cloudflare Workers Static Assets;
+- validações automatizadas de CSS, bundle, interações e renderização visual.
 
-## Resultados visuais
+## Qualidade visual
 
-O gate do projeto considera aprovado o RMSE normalizado abaixo de 15%.
+O projeto utiliza um gate de RMSE normalizado abaixo de 15%.
 
 | Viewport | RMSE da página completa |
 |---|---:|
@@ -43,15 +42,16 @@ Todas as nove seções foram aprovadas individualmente.
 
 ```bash
 npm install
-npm run assets:bootstrap
 npm run dev
 ```
 
-Abra `http://127.0.0.1:3000`.
+A aplicação ficará disponível em:
 
-Os assets PNG são baixados da página pública de referência e validados por SHA-256. No GitHub, esse processo também é executado automaticamente pelo workflow `Bootstrap public assets`.
+```text
+http://127.0.0.1:3000
+```
 
-## Comandos
+## Comandos principais
 
 ```bash
 npm run dev
@@ -64,17 +64,15 @@ npm run audit:interaction
 npm run audit:a11y
 ```
 
-As auditorias de RMSE completas dependem das screenshots de referência aprovadas, mantidas fora do repositório público para evitar versionar dezenas de megabytes de artefatos visuais.
-
 ## Estrutura
 
 ```text
 src/
-├── components/ui/                 # componentes shadcn/ui locais
+├── components/ui/
 ├── features/dr-helio-russo/
-│   ├── animations/                # infraestrutura Motion
+│   ├── animations/
 │   ├── components/
-│   ├── sections/                  # nove seções da landing page
+│   ├── sections/
 │   ├── DrHelioRussoPage.tsx
 │   ├── assets.ts
 │   └── data.ts
@@ -87,9 +85,9 @@ scripts/
 docs/
 ```
 
-## Política de estilização
+## Estilização
 
-O projeto segue **Tailwind-first**:
+O projeto segue uma política **Tailwind-first**:
 
 - estilos dos componentes ficam em classes utilitárias no JSX;
 - `src/styles.css` é reservado para infraestrutura global;
@@ -97,6 +95,6 @@ O projeto segue **Tailwind-first**:
 - inline styles são permitidos apenas para valores calculados em runtime;
 - `npm run audit:css` protege essas regras.
 
-## Licença e referência
+## Deploy
 
-O código desta recriação foi escrito para estudo e portfólio. Imagens e identidade visual pertencem aos respectivos titulares e são utilizadas somente como material de demonstração do trabalho de frontend.
+O projeto está preparado para publicação estática no Cloudflare Workers Static Assets.
