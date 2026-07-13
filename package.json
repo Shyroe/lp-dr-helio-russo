@@ -19,7 +19,10 @@
     "format": "biome format --write .",
     "format:check": "biome format .",
     "check:biome": "biome check .",
-    "validate": "pnpm run typecheck && pnpm run check:biome && pnpm run build",
+    "test": "vitest --config vitest.config.ts",
+    "test:run": "vitest run --config vitest.config.ts",
+    "test:components": "vitest run --config vitest.config.ts",
+    "validate": "pnpm run typecheck && pnpm run test:run && pnpm run check:biome && pnpm run build",
     "audit:css": "node scripts/css-audit.mjs",
     "audit:bundle": "pnpm run build && node scripts/bundle-audit.mjs"
   },
