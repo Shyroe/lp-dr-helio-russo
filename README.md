@@ -16,6 +16,7 @@ Landing page odontológica responsiva construída como projeto de portfólio e e
 - shadcn/ui e Radix UI
 - Motion
 - Embla Carousel
+- Vitest e React Testing Library
 - Biome
 - Cloudflare Workers
 
@@ -25,6 +26,7 @@ Landing page odontológica responsiva construída como projeto de portfólio e e
 - componentes reutilizáveis e arquitetura orientada por features;
 - Carousel de depoimentos com Embla;
 - FAQ acessível com Radix Accordion;
+- testes de componente para Accordion, Carousel e depoimentos;
 - assets, fontes e ícones servidos localmente;
 - navegação por teclado e suporte a `prefers-reduced-motion`;
 - política Tailwind-first protegida por auditoria automatizada;
@@ -45,6 +47,7 @@ src/
 ├── styles.css
 └── theme.css
 
+tests/
 public/assets/landing/dr-helio-russo/
 scripts/
 ```
@@ -68,6 +71,7 @@ A aplicação ficará disponível em `http://127.0.0.1:3000`.
 
 ```bash
 pnpm run typecheck
+pnpm run test:run
 pnpm run check:biome
 pnpm run build
 pnpm run audit:css
@@ -95,4 +99,4 @@ Nomes, marcas, fotografias, textos, depoimentos, identidade visual e outros mate
 
 ## Escopo deste repositório
 
-Este repositório contém somente o código e os assets necessários para executar a landing page pública. Referências visuais, crops, relatórios internos, prompts e artefatos do laboratório de reconstrução não fazem parte desta versão.
+Este repositório contém somente o código, os testes de componente e os assets necessários para executar e validar a landing page pública. Referências visuais, crops, relatórios internos, prompts e artefatos do laboratório de reconstrução não fazem parte desta versão.
