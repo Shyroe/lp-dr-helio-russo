@@ -1,0 +1,8 @@
+{
+  "schemaVersion": 1,
+  "managedBy": "lp-dr-helio-russo-public-sync",
+  "sourceSha": "da81ca01f6a6350f9c19695765565b8c13cd9ba3",
+  "targetRepository": "Shyroe/lp-dr-helio-russo",
+  "targetBranch": "main",
+  "exportArchiveSha256": "9cf139737bab06a492e713cea6717e5aab0536bdc4dfac0de67f04519e7c5f1b"
+}

@@ -1,68 +1,35 @@
-# Dr. Hélio Russo — Landing Page
+# Landing Page — Dr. Hélio Russo
 
-Landing page odontológica responsiva desenvolvida como projeto de portfólio com uma stack frontend moderna, foco em fidelidade visual, acessibilidade, desempenho e qualidade de implementação.
+Landing page odontológica responsiva construída como projeto de portfólio e estudo de reconstrução frontend pixel-perfect, com foco em fidelidade visual, componentização, acessibilidade e entrega em produção.
+
+> Este é um projeto independente de portfólio. Não é o site oficial do Dr. Hélio Russo e não representa parceria, endosso ou vínculo comercial.
+
+## Demonstração
+
+- Produção: https://lp-dr-helio-russo.shyroe.workers.dev/
 
 ## Stack
 
 - TanStack Start e TanStack Router
 - React 19 e TypeScript
-- Tailwind CSS v4 com abordagem Tailwind-first
+- Tailwind CSS v4
 - shadcn/ui e Radix UI
-- Motion (`motion/react-mini`)
+- Motion
 - Embla Carousel
 - Biome
-- Playwright e ImageMagick para auditorias visuais
+- Cloudflare Workers
 
-## Recursos
+## Destaques técnicos
 
-- nove seções responsivas;
-- layouts específicos para desktop, tablet e mobile;
-- entrance animations com suporte a `prefers-reduced-motion`;
-- Carousel de depoimentos;
-- FAQ interativa;
-- navegação por teclado e melhorias de acessibilidade;
-- assets locais;
-- SSR com TanStack Start;
-- estrutura preparada para Cloudflare Workers Static Assets;
-- validações automatizadas de CSS, bundle, interações e renderização visual.
-
-## Qualidade visual
-
-O projeto utiliza um gate de RMSE normalizado abaixo de 15%.
-
-| Viewport | RMSE da página completa |
-|---|---:|
-| Desktop | 8,22% |
-| Tablet | 11,18% |
-| Mobile | 11,76% |
-
-Todas as nove seções foram aprovadas individualmente.
-
-## Instalação
-
-```bash
-npm install
-npm run dev
-```
-
-A aplicação ficará disponível em:
-
-```text
-http://127.0.0.1:3000
-```
-
-## Comandos principais
-
-```bash
-npm run dev
-npm run build
-npm run validate
-npm run audit:css
-npm run audit:bundle
-npm run audit:motion
-npm run audit:interaction
-npm run audit:a11y
-```
+- nove seções responsivas para desktop, tablet e mobile;
+- componentes reutilizáveis e arquitetura orientada por features;
+- Carousel de depoimentos com Embla;
+- FAQ acessível com Radix Accordion;
+- assets, fontes e ícones servidos localmente;
+- navegação por teclado e suporte a `prefers-reduced-motion`;
+- política Tailwind-first protegida por auditoria automatizada;
+- orçamento de bundle validado no CI;
+- build SSR preparado para Cloudflare Workers.
 
 ## Estrutura
 
@@ -72,29 +39,60 @@ src/
 ├── features/dr-helio-russo/
 │   ├── animations/
 │   ├── components/
-│   ├── sections/
-│   ├── DrHelioRussoPage.tsx
-│   ├── assets.ts
-│   └── data.ts
+│   └── sections/
 ├── routes/
+├── router.tsx
 ├── styles.css
 └── theme.css
 
 public/assets/landing/dr-helio-russo/
 scripts/
-docs/
 ```
 
-## Estilização
+## Executar localmente
 
-O projeto segue uma política **Tailwind-first**:
+Requisitos:
 
-- estilos dos componentes ficam em classes utilitárias no JSX;
-- `src/styles.css` é reservado para infraestrutura global;
-- `src/theme.css` contém tokens compartilhados;
-- inline styles são permitidos apenas para valores calculados em runtime;
-- `npm run audit:css` protege essas regras.
+- Node.js 24+
+- pnpm 11+
+
+```bash
+corepack enable
+pnpm install --frozen-lockfile
+pnpm run dev
+```
+
+A aplicação ficará disponível em `http://127.0.0.1:3000`.
+
+## Validação
+
+```bash
+pnpm run typecheck
+pnpm run check:biome
+pnpm run build
+pnpm run audit:css
+pnpm run audit:bundle
+```
+
+O workflow público executa esses gates em Pull Requests e pushes na branch principal.
 
 ## Deploy
 
-O projeto está preparado para publicação estática no Cloudflare Workers Static Assets.
+O projeto utiliza o plugin oficial do Cloudflare para Vite e Wrangler:
+
+```bash
+pnpm run cf:dry-run
+pnpm run deploy
+```
+
+Credenciais e secrets devem permanecer fora do repositório e ser configurados no Cloudflare ou no ambiente local autenticado.
+
+## Licença e materiais de terceiros
+
+O código-fonte autoral deste projeto é distribuído sob a [Licença MIT](LICENSE).
+
+Nomes, marcas, fotografias, textos, depoimentos, identidade visual e outros materiais derivados da página de referência não são relicenciados pela MIT. Consulte [`NOTICE.md`](NOTICE.md) para os limites de uso e atribuição.
+
+## Escopo deste repositório
+
+Este repositório contém somente o código e os assets necessários para executar a landing page pública. Referências visuais, crops, relatórios internos, prompts e artefatos do laboratório de reconstrução não fazem parte desta versão.
