@@ -1,0 +1,88 @@
+name: Temporary Public Screenshot
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/temporary-public-screenshot.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: pnpm
+          cache-dependency-path: pnpm-lock.yaml
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm exec playwright install --with-deps chromium
+      - run: pnpm run build
+      - name: Capture screenshots
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf screenshots
+          mkdir -p screenshots
+          pnpm exec vite preview --host 127.0.0.1 --port 4173 > /tmp/public-preview.log 2>&1 &
+          preview_pid=$!
+          trap 'kill "$preview_pid" 2>/dev/null || true' EXIT
+
+          for attempt in {1..60}; do
+            if curl --fail --silent http://127.0.0.1:4173/ > /dev/null; then
+              break
+            fi
+            sleep 1
+          done
+
+          node --input-type=module <<'NODE'
+          import { chromium } from 'playwright'
+
+          const browser = await chromium.launch({ headless: true })
+          const page = await browser.newPage({
+            viewport: { width: 1440, height: 900 },
+            deviceScaleFactor: 1,
+            colorScheme: 'light',
+            locale: 'pt-BR',
+          })
+
+          await page.goto('http://127.0.0.1:4173/?motion=disabled', { waitUntil: 'networkidle' })
+          await page.evaluate(async () => {
+            document.querySelectorAll('img').forEach((img) => {
+              img.loading = 'eager'
+            })
+            for (let y = 0; y < document.documentElement.scrollHeight; y += 700) {
+              window.scrollTo(0, y)
+              await new Promise((resolve) => setTimeout(resolve, 80))
+            }
+            window.scrollTo(0, 0)
+          })
+          await page.evaluate(() => document.fonts.ready)
+          await page.waitForTimeout(1500)
+          await page.screenshot({
+            path: 'screenshots/dr-helio-public-desktop-fullpage-1440.png',
+            fullPage: true,
+          })
+          await page.screenshot({
+            path: 'screenshots/dr-helio-public-hero-1440x900.png',
+          })
+          await browser.close()
+          NODE
+      - name: Commit screenshots to temporary branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add screenshots/*.png
+          git commit -m 'chore: add temporary public screenshots'
+          git push origin HEAD:${{ github.event.pull_request.head.ref }}
