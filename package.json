@@ -20,11 +20,13 @@
     "format:check": "biome format .",
     "check:biome": "biome check .",
     "test": "vitest --config vitest.config.ts",
-    "test:run": "vitest run --config vitest.config.ts",
-    "test:components": "vitest run --config vitest.config.ts",
+    "test:run": "pnpm run test:components && pnpm run test:infrastructure",
+    "test:components": "vitest run --config vitest.config.ts --project components",
+    "test:infrastructure": "vitest run --config vitest.config.ts --project infrastructure --passWithNoTests",
+    "test:e2e": "playwright test",
     "validate": "pnpm run typecheck && pnpm run test:run && pnpm run check:biome && pnpm run build",
-    "audit:css": "node scripts/css-audit.mjs",
-    "audit:bundle": "pnpm run build && node scripts/bundle-audit.mjs"
+    "audit:css": "node scripts/audits/build/css-audit.mjs",
+    "audit:bundle": "pnpm run build && node scripts/audits/build/bundle-audit.mjs"
   },
   "dependencies": {
     "@fontsource/fraunces": "^5.2.9",
@@ -70,7 +72,8 @@
     "typescript": "^6.0.2",
     "vite": "^8.0.0",
     "vitest": "^4.1.5",
-    "wrangler": "^4.110.0"
+    "wrangler": "^4.110.0",
+    "@playwright/test": "^1.61.1"
   },
   "packageManager": "pnpm@11.5.1",
   "description": "Landing page odontológica responsiva construída com TanStack Start, React, TypeScript, Tailwind CSS e Cloudflare Workers.",

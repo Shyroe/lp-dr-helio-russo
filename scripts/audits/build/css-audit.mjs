@@ -22,7 +22,8 @@ const legacyTokenPattern =
 // Adding another inline style requires an explicit audit-policy update and documentation.
 const approvedDynamicInlineStyles = new Map([
   ['src/features/dr-helio-russo/sections/LifeStagesSection.tsx', [['backgroundImage']]],
-  ['src/features/dr-helio-russo/sections/TestimonialsSection.tsx', [['height', 'transform'], ['transform']]],
+  ['src/features/dr-helio-russo/sections/testimonials/ReviewCard.tsx', [['height', 'transform']]],
+  ['src/features/dr-helio-russo/sections/testimonials/TestimonialsSection.tsx', [['transform']]],
 ])
 
 async function listFiles(dir) {

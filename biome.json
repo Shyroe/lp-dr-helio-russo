@@ -10,8 +10,10 @@
     "includes": [
       "src/**/*.ts",
       "src/**/*.tsx",
-      "tests/**/*.ts",
-      "tests/**/*.tsx",
+      "test/**/*.ts",
+      "test/**/*.tsx",
+      "e2e/**/*.tsx",
+      "e2e/**/*.ts",
       "scripts/**/*.ts",
       "scripts/**/*.tsx",
       "scripts/**/*.mjs",
