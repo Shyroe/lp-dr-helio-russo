@@ -4,8 +4,8 @@ import { FooterSection } from './sections/FooterSection'
 import { HeroSection } from './sections/HeroSection'
 import { HygieneBenefitsSection } from './sections/HygieneBenefitsSection'
 import { LifeStagesSection } from './sections/LifeStagesSection'
-import { TestimonialsSection } from './sections/TestimonialsSection'
 import { TreatmentsSection } from './sections/TreatmentsSection'
+import { TestimonialsSection } from './sections/testimonials/TestimonialsSection'
 import { WhyChoosePreviewSection } from './sections/WhyChoosePreviewSection'
 
 export function DrHelioRussoPage() {
