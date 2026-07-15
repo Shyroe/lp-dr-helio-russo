@@ -1,0 +1,47 @@
+name: Replace branch with validated reference export
+
+on:
+  push:
+    branches:
+      - agent/replace-public-with-reference
+    paths:
+      - '.github/workflows/replace-with-reference-export.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  replace:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      EXPORT_ARTIFACT_URL: 'https://sdmntprbrazilsouth.oaiusercontent.com/files/00000000-1028-720e-a761-ea2c495c57c4/raw?se=2026-07-15T00:55:42Z&sp=r&sv=2026-02-06&sr=b&scid=e82c4597-68c5-593c-9fe2-4fac1f86ff95&skoid=a6356955-0ca0-4033-9150-c0c162458498&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-07-14T00:59:49Z&ske=2026-07-16T00:59:49Z&sks=b&skv=2026-02-06&sig=QjTxveUfhwXMfkM01qyNU7cF%2B/pJHCzXpoREL7J/sQo%3D'
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: agent/replace-public-with-reference
+          fetch-depth: 0
+      - name: Download and verify validated export
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/reference-artifact /tmp/reference-public
+          mkdir -p /tmp/reference-artifact /tmp/reference-public
+          curl --fail --location --retry 3 "$EXPORT_ARTIFACT_URL" -o /tmp/reference-artifact.zip
+          unzip -q /tmp/reference-artifact.zip -d /tmp/reference-artifact
+          cd /tmp/reference-artifact
+          sha256sum --check ./*.zip.sha256
+          inner_zip="$(find . -maxdepth 1 -type f -name 'lp-dr-helio-russo-*.zip' -print -quit)"
+          test -n "$inner_zip"
+          unzip -q "$inner_zip" -d /tmp/reference-public
+      - name: Replace branch tree exactly
+        shell: bash
+        run: |
+          set -euo pipefail
+          rsync -a --delete --exclude='.git/' /tmp/reference-public/ ./
+          git status --short
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add --all
+          git commit -m 'fix: restore exact validated reference layout'
+          git push origin HEAD:agent/replace-public-with-reference
