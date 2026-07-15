@@ -1,0 +1,61 @@
+name: Temporary Artifact Cleanup
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - '.github/workflows/temporary-artifact-cleanup.yml'
+
+permissions:
+  actions: write
+  contents: write
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: chore/temporary-artifact-cleanup
+          fetch-depth: 0
+          show-progress: false
+
+      - name: Delete regenerable artifacts and remove temporary workflow
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          deleted_count=0
+          deleted_bytes=0
+
+          while true; do
+            curl --fail --silent --show-error \
+              -H "Accept: application/vnd.github+json" \
+              -H "Authorization: Bearer ${GH_TOKEN}" \
+              -H "X-GitHub-Api-Version: 2022-11-28" \
+              "${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/actions/artifacts?per_page=100&page=1" \
+              > /tmp/artifacts.json
+            count="$(jq '.artifacts | length' /tmp/artifacts.json)"
+            [ "$count" -gt 0 ] || break
+            while IFS=$'\t' read -r artifact_id artifact_name artifact_bytes; do
+              echo "Deleting ${artifact_id}: ${artifact_name} (${artifact_bytes} bytes)"
+              curl --fail --silent --show-error --request DELETE \
+                -H "Accept: application/vnd.github+json" \
+                -H "Authorization: Bearer ${GH_TOKEN}" \
+                -H "X-GitHub-Api-Version: 2022-11-28" \
+                "${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/actions/artifacts/${artifact_id}"
+              deleted_count=$((deleted_count + 1))
+              deleted_bytes=$((deleted_bytes + artifact_bytes))
+            done < <(jq -r '.artifacts[] | [.id, .name, .size_in_bytes] | @tsv' /tmp/artifacts.json)
+          done
+
+          echo "DELETED_COUNT=${deleted_count}"
+          echo "DELETED_BYTES=${deleted_bytes}"
+
+          git rm .github/workflows/temporary-artifact-cleanup.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'chore: remove temporary artifact cleanup workflow'
+          git push origin HEAD:chore/temporary-artifact-cleanup
