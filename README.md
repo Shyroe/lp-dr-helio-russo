@@ -1,8 +1,8 @@
 # Dr. Hélio Russo — Desafio Técnico Frontend
 
-Desafio técnico independente de reconstrução frontend de uma landing page odontológica, desenvolvido com foco em **fidelidade visual, responsividade contínua, acessibilidade, performance e qualidade de engenharia**.
+Desafio técnico frontend voltado ao desenvolvimento de uma landing page odontológica production-grade, com foco em **qualidade visual, responsividade contínua, acessibilidade, performance e engenharia de frontend**.
 
-O objetivo não foi apenas produzir um layout semelhante à referência, mas reconstruir toda a experiência com uma stack moderna, preservando composição, hierarquia visual, comportamento responsivo e interações enquanto a implementação original era substituída por uma arquitetura React/TanStack orientada a produção.
+O projeto combina uma interface de alto nível de acabamento com uma arquitetura moderna em React e TanStack Start, priorizando comportamento responsivo consistente, carregamento eficiente, interações acessíveis e uma base de código testável e preparada para produção.
 
 ## Demonstração
 
@@ -10,12 +10,12 @@ O objetivo não foi apenas produzir um layout semelhante à referência, mas rec
 
 ## O desafio
 
-A implementação exigiu tratar a página como um problema real de engenharia frontend, com objetivos simultâneos de qualidade visual e técnica:
+A implementação foi conduzida como um problema real de engenharia frontend, com objetivos simultâneos de qualidade visual e técnica:
 
-- reconstruir nove seções com alta fidelidade à referência visual;
+- implementar nove seções com alto nível de consistência visual;
 - manter comportamento consistente de `320px` a `2336px`, incluindo tablet, desktop e ultrawide;
-- preservar sobreposições, grids, proporções, crops de imagens, tipografia e espaçamentos em diferentes breakpoints;
-- substituir dependências e padrões legados por uma stack moderna baseada em React e TanStack Start;
+- garantir sobreposições, grids, proporções, crops de imagens, tipografia e espaçamentos corretos em diferentes breakpoints;
+- adotar uma stack moderna baseada em React e TanStack Start;
 - eliminar Bootstrap, jQuery, Owl Carousel, assets via CDN e downloads externos em runtime;
 - servir fontes, imagens e ícones localmente;
 - garantir navegação por teclado, semântica adequada e contraste compatível com WCAG AA;
@@ -127,12 +127,12 @@ pnpm run deploy
 
 Credenciais e secrets permanecem fora do repositório e devem ser configurados no Cloudflare ou em um ambiente local autenticado.
 
-## Transparência sobre a referência
+## Sobre o projeto
 
-Este é um **desafio técnico independente de reconstrução frontend**. Não é o site oficial do Dr. Hélio Russo e não representa parceria, endosso, contratação ou vínculo comercial.
+Este é um **desafio técnico frontend independente**. Não é o site oficial do Dr. Hélio Russo e não representa parceria, endosso, contratação ou vínculo comercial.
 
-O código-fonte autoral deste projeto é distribuído sob a [Licença MIT](LICENSE). Nomes, marcas, fotografias, textos, depoimentos, identidade visual e outros materiais derivados da página de referência não são relicenciados pela MIT. Consulte [`NOTICE.md`](NOTICE.md) para os limites de uso e atribuição.
+O código-fonte autoral deste projeto é distribuído sob a [Licença MIT](LICENSE). Nomes, marcas, fotografias, textos, depoimentos, identidade visual e outros materiais de terceiros não são relicenciados pela MIT. Consulte [`NOTICE.md`](NOTICE.md) para os limites de uso e atribuição.
 
 ## Escopo do repositório público
 
-Este repositório contém o código necessário para executar, estudar e validar a implementação técnica. Materiais internos de reconstrução — referências visuais, crops, relatórios, prompts e evidências do laboratório — permanecem fora da versão pública.
+Este repositório contém o código necessário para executar, estudar e validar a implementação técnica. Artefatos internos de desenvolvimento, QA, relatórios, prompts e evidências de validação permanecem fora da versão pública.

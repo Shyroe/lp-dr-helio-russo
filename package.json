@@ -77,7 +77,7 @@
     "@playwright/test": "^1.61.1"
   },
   "packageManager": "pnpm@11.5.1",
-  "description": "Desafio técnico frontend de reconstrução pixel-perfect com TanStack Start, React, TypeScript, Tailwind CSS e Cloudflare Workers.",
+  "description": "Desafio técnico frontend de alta fidelidade visual com TanStack Start, React, TypeScript, Tailwind CSS e Cloudflare Workers.",
   "license": "MIT",
   "homepage": "https://dr-helio-russo.leonardocamargo.dev.br/",
   "repository": {
