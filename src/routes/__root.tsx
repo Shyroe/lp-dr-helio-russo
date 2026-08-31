@@ -1,7 +1,10 @@
+import fraunces700Url from '@fontsource/fraunces/files/fraunces-latin-700-normal.woff2?url'
+import montserrat400Url from '@fontsource/montserrat/files/montserrat-latin-400-normal.woff2?url'
+import montserrat700Url from '@fontsource/montserrat/files/montserrat-latin-700-normal.woff2?url'
 import { createRootRoute, HeadContent, Scripts } from '@tanstack/react-router'
 import type { ReactNode } from 'react'
 
-import appCss from '../styles.css?url'
+import '../styles.css'
 
 export const Route = createRootRoute({
   head: () => ({
@@ -22,7 +25,25 @@ export const Route = createRootRoute({
       { title: 'Dr. Hélio Russo | Odontologia' },
     ],
     links: [
-      { rel: 'stylesheet', href: appCss },
+      { rel: 'preload', href: montserrat400Url, as: 'font', type: 'font/woff2', crossOrigin: 'anonymous' },
+      { rel: 'preload', href: montserrat700Url, as: 'font', type: 'font/woff2', crossOrigin: 'anonymous' },
+      { rel: 'preload', href: fraunces700Url, as: 'font', type: 'font/woff2', crossOrigin: 'anonymous' },
+      {
+        rel: 'preload',
+        href: '/assets/landing/dr-helio-russo/hero-bg-mobile-lcp.webp',
+        as: 'image',
+        type: 'image/webp',
+        media: '(max-width: 767px)',
+        fetchPriority: 'high',
+      },
+      {
+        rel: 'preload',
+        href: '/assets/landing/dr-helio-russo/hero-bg-desktop.webp',
+        as: 'image',
+        type: 'image/webp',
+        media: '(min-width: 768px)',
+        fetchPriority: 'high',
+      },
       { rel: 'icon', href: '/favicon.ico' },
     ],
   }),
@@ -31,7 +52,7 @@ export const Route = createRootRoute({
 
 function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
   return (
-    <html lang="pt-BR">
+    <html lang="pt-BR" className="scroll-smooth motion-reduce:scroll-auto">
       <head>
         <HeadContent />
       </head>

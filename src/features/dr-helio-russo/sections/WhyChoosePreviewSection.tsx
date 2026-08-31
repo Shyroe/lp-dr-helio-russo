@@ -44,19 +44,19 @@ export function WhyChoosePreviewSection() {
   return (
     <section
       aria-labelledby="dr-helio-why-title"
-      className="bg-[rgba(0,113,196,0.09)] px-[30px] py-[30px] text-center sm:px-10 sm:pt-10 sm:pb-[39px] lg:px-20 lg:pt-20 lg:pb-[81px]"
+      className="bg-[rgba(0,113,196,0.09)] px-[30px] py-[30px] text-center [contain-intrinsic-size:auto_1577px] [content-visibility:auto] md:px-10 md:pt-10 md:pb-[39px] md:[contain-intrinsic-size:auto_829px] lg:px-20 lg:pt-20 lg:pb-[81px] lg:[contain-intrinsic-size:auto_774px]"
     >
       <div className="mx-auto flex max-w-[1140px] flex-col items-center gap-[30px]">
         <EntranceReveal
           as="h2"
           effect="fadeInUp"
           id="dr-helio-why-title"
-          className="w-full max-w-full font-serif text-[25px] font-bold leading-[25px] tracking-normal text-[#004374] sm:max-w-[73%] sm:text-[35px] sm:leading-[35px] lg:max-w-[43%]"
+          className="w-full max-w-full font-serif text-[25px] font-bold leading-[25px] tracking-normal text-[#004374] md:max-w-[73%] md:text-[35px] md:leading-[35px] lg:max-w-[43%]"
         >
           Por Que Escolher Nosso Consultório?
         </EntranceReveal>
 
-        <div className="mt-5 grid w-full grid-cols-1 gap-5 sm:auto-rows-[287px] sm:grid-cols-3 lg:max-w-[80%] lg:auto-rows-[259px]">
+        <div className="mt-5 grid w-full grid-cols-1 gap-5 md:grid-cols-3 min-[768px]:max-[771px]:auto-rows-[287px] min-[772px]:max-[823px]:auto-rows-[281px] min-[824px]:max-[1024px]:auto-rows-[259px] min-[1025px]:max-[1089px]:auto-rows-[281px] min-[1025px]:max-w-[80%] min-[1090px]:auto-rows-[259px]">
           {whyChoose.map((item, index) => {
             const tone = cardTones[index] ?? cardTones[0]
 
@@ -64,13 +64,11 @@ export function WhyChoosePreviewSection() {
               <EntranceReveal
                 key={item.title}
                 effect={index % 3 === 0 ? 'fadeInLeft' : index % 3 === 2 ? 'fadeInRight' : 'zoomIn'}
-                className="h-full"
               >
                 <Card
                   data-dr-helio-card="why-choose"
                   className={cn(
-                    'gap-0 rounded-[20px] border-0 border-b-[5px] bg-white p-5 text-center shadow-[0_0_10px_2px_rgba(0,0,0,0.10)] transition duration-300 hover:shadow-[0_0_15px_10px_rgba(255,255,255,0.5)] sm:h-full',
-                    ['h-[208px]', 'h-[207px]', 'h-[229px]', 'h-[208px]', 'h-[208px]', 'h-[207px]'][index],
+                    'gap-0 rounded-[20px] border-0 border-b-[5px] bg-white p-5 text-center shadow-[0_0_10px_2px_rgba(0,0,0,0.10)] transition duration-300 hover:shadow-[0_0_15px_10px_rgba(255,255,255,0.5)] md:h-full',
                     tone.border
                   )}
                 >
@@ -80,14 +78,14 @@ export function WhyChoosePreviewSection() {
 
                   <h3
                     className={cn(
-                      'mx-auto mt-2 mb-4 text-[18px] font-bold leading-[21.6px] tracking-normal sm:text-[22px] sm:leading-[26.4px]',
-                      index === 2 && 'max-sm:max-w-[150px]',
+                      'mx-auto mt-2 mb-4 text-[18px] font-bold leading-[21.6px] tracking-normal md:text-[22px] md:leading-[26.4px]',
+                      index === 2 && 'max-md:max-w-[150px]',
                       tone.title
                     )}
                   >
                     {item.title}
                   </h3>
-                  <p className="mx-auto text-[14px] font-normal leading-[21px] tracking-[-0.6px] text-[#545454] sm:tracking-[-0.5px] lg:tracking-normal">
+                  <p className="mx-auto text-[14px] font-normal leading-[21px] tracking-[-0.6px] text-[#545454] md:tracking-[-0.5px] lg:tracking-normal">
                     {item.description}
                   </p>
                 </Card>
@@ -101,7 +99,7 @@ export function WhyChoosePreviewSection() {
           effect="zoomIn"
           slow={false}
           href={whatsappUrl}
-          className="mt-5 inline-flex h-[60px] w-full items-center justify-center gap-[5px] rounded-[0_20px_0_20px] bg-[linear-gradient(360deg,#0066AF_0%,#004374_100%)] px-[15px] py-[15px] font-sans text-[15px] font-bold leading-[15px] whitespace-nowrap text-white uppercase shadow-[0_0_23px_-2px_rgba(0,81,140,0.8)] transition hover:-translate-y-0.5 hover:brightness-110 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#0066af] sm:mt-10 sm:h-[45px] sm:w-[392px] sm:px-10 lg:h-[46px] lg:w-[412px] lg:text-[16px] lg:leading-[16px]"
+          className="mt-5 inline-flex h-[60px] w-full items-center justify-center gap-[5px] rounded-[0_20px_0_20px] bg-[linear-gradient(360deg,#0066AF_0%,#004374_100%)] px-[15px] py-[15px] text-center font-sans text-[15px] font-bold leading-[15px] whitespace-normal text-white uppercase shadow-[0_0_23px_-2px_rgba(0,81,140,0.8)] transition hover:-translate-y-0.5 hover:brightness-110 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#0066af] max-[389px]:h-auto max-[389px]:min-h-[60px] md:mt-10 md:h-[45px] md:w-[392px] md:px-10 md:whitespace-nowrap lg:h-[46px] lg:w-[412px] lg:text-[16px] lg:leading-[16px]"
         >
           <span>{cta}</span>
           <DrHelioIcon name="whatsapp" className="size-[15px] shrink-0 lg:size-4" />

@@ -1,4 +1,4 @@
-import { createElement, type ReactNode, type SVGProps } from 'react'
+import type { SVGProps } from 'react'
 
 type RefIconProps = SVGProps<SVGSVGElement>
 type SvgTag = 'g' | 'path' | 'circle' | 'rect' | 'line' | 'polygon' | 'polyline' | 'ellipse'
@@ -20,7 +20,7 @@ export type ReferenceSvgIconName =
   | 'adult'
   | 'senior'
 
-const referenceSvgIconDefinitions: Record<ReferenceSvgIconName, ReferenceIconDefinition> = {
+export const referenceSvgIconDefinitions: Record<ReferenceSvgIconName, ReferenceIconDefinition> = {
   cleaning: {
     viewBox: '0 0 512.001 512.001',
     sourceTitle: 'Limpeza e Profilaxia',
@@ -1219,24 +1219,35 @@ const referenceSvgIconDefinitions: Record<ReferenceSvgIconName, ReferenceIconDef
   },
 }
 
-function renderSvgNode(node: SvgNode, key: string): ReactNode {
-  const children = node.children?.map((child, index) => renderSvgNode(child, `${key}-${index}`))
-  return createElement(node.tag, { key, ...node.attrs }, children)
+const referenceSvgIconViewBoxes: Record<ReferenceSvgIconName, string> = {
+  cleaning: '0 0 512.001 512.001',
+  quickWhitening: '0 0 64 64',
+  quickFacets: '0 0 512 512',
+  implant: '0 0 480 480',
+  whySmile: '0 0 512 512',
+  whyFacets: '0 0 480.034 480.034',
+  care: '0 0 511.999 511.999',
+  calendar: '0 0 512 512',
+  payment: '0 0 512.16 512.16',
+  people: '0 0 96 96',
+  baby: '0 0 512 512',
+  adult: '0 0 512 512',
+  senior: '0 0 512 512',
 }
 
-export function ReferenceSvgIcon({ name, ...props }: RefIconProps & { name: ReferenceSvgIconName }) {
-  const definition = referenceSvgIconDefinitions[name]
+const referenceSvgIconSprite = '/assets/landing/dr-helio-russo/reference-icons.svg'
 
+export function ReferenceSvgIcon({ name, ...props }: RefIconProps & { name: ReferenceSvgIconName }) {
   return (
     <svg
       aria-hidden="true"
       focusable="false"
       fill="currentColor"
-      viewBox={definition.viewBox}
+      viewBox={referenceSvgIconViewBoxes[name]}
       xmlns="http://www.w3.org/2000/svg"
       {...props}
     >
-      {definition.nodes.map((node, index) => renderSvgNode(node, `${name}-${index}`))}
+      <use href={`${referenceSvgIconSprite}#dr-icon-${name}`} />
     </svg>
   )
 }

@@ -13,6 +13,7 @@ function GoogleIcon({ className }: { className?: string }) {
       className={className}
       width={20}
       height={20}
+      loading="lazy"
     />
   )
 }
@@ -25,6 +26,7 @@ function VerifiedIcon() {
       className="ml-[7px] size-[15px] shrink-0"
       width={15}
       height={15}
+      loading="lazy"
     />
   )
 }
@@ -41,6 +43,7 @@ function StarRating() {
           className="mr-px size-[17px] last:mr-0"
           width={17}
           height={17}
+          loading="lazy"
         />
       ))}
     </span>
@@ -48,8 +51,25 @@ function StarRating() {
 }
 
 function ReviewAvatar({ review }: { review: Testimonial }) {
+  if (review.avatar) {
+    return (
+      <img
+        data-dr-helio-review-avatar
+        src={review.avatar}
+        alt=""
+        aria-hidden="true"
+        className="size-10 shrink-0 rounded-full object-cover"
+        width={40}
+        height={40}
+        loading="lazy"
+        decoding="async"
+      />
+    )
+  }
+
   return (
     <span
+      data-dr-helio-review-avatar
       aria-hidden="true"
       className={cn(
         'inline-flex size-10 shrink-0 items-center justify-center rounded-full text-[24px] font-normal leading-none text-white',
@@ -89,9 +109,9 @@ export function ReviewCard({ review }: { review: Testimonial }) {
     >
       <div className="flex items-start">
         <ReviewAvatar review={review} />
-        <div className="relative top-px ml-[15px] min-w-0 flex-1 sm:ml-[14px]">
+        <div className="relative top-px ml-[15px] min-w-0 flex-1 md:ml-[14px]">
           <p className="truncate text-[15.5px] font-bold leading-[18px]">{review.name}</p>
-          <p className="text-[13.5px] font-normal leading-4 text-[#8a8a8a] sm:text-xs">{review.date}</p>
+          <p className="text-[13.5px] font-normal leading-4 text-[#767676] md:text-xs">{review.date}</p>
         </div>
         <GoogleIcon className="ml-3 size-5 shrink-0" />
       </div>
@@ -107,7 +127,7 @@ export function ReviewCard({ review }: { review: Testimonial }) {
           tabIndex={hasScrollIndicator ? 0 : undefined}
           aria-label={`Texto da avaliação de ${review.name}`}
           data-dr-helio-review-scroll
-          className="relative top-0.5 h-[87px] overflow-y-auto pr-[11px] text-[16.5px] font-normal leading-[21.5px] tracking-[0.1px] [scrollbar-width:none] focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-[#0066af] sm:top-px sm:text-base sm:leading-[21px] sm:tracking-normal [&::-webkit-scrollbar]:hidden"
+          className="relative top-0.5 h-[87px] overflow-y-auto pr-[11px] text-[16.5px] font-normal leading-[21.5px] tracking-[0.1px] [scrollbar-width:none] focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-[#0066af] md:top-px md:text-base md:leading-[21px] md:tracking-normal [&::-webkit-scrollbar]:hidden"
           onScroll={syncScrollThumb}
         >
           {review.text}

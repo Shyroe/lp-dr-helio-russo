@@ -14,6 +14,7 @@ function TrustindexInfoIcon() {
       className="size-[12px] shrink-0"
       width={12}
       height={12}
+      loading="lazy"
     />
   )
 }
@@ -43,24 +44,25 @@ export function TestimonialsSection() {
 
   return (
     <section
+      data-section="testimonials"
       aria-labelledby="dr-helio-testimonials-title"
-      className="bg-[#e8f2fa] px-[30px] pb-[30px] pt-[50px] text-center sm:px-10 sm:py-10 lg:px-20 lg:py-20"
+      className="bg-[#e8f2fa] px-[30px] pb-[30px] pt-[50px] text-center [contain-intrinsic-size:auto_373px] [content-visibility:auto] md:px-10 md:py-10 md:[contain-intrinsic-size:auto_362px] lg:px-20 lg:py-20 lg:[contain-intrinsic-size:auto_362px]"
     >
       <div className="mx-auto flex max-w-[1140px] flex-col items-center">
         <EntranceReveal
           as="h2"
           effect="fadeInUp"
           id="dr-helio-testimonials-title"
-          className="relative -top-px w-full font-serif text-[25px] font-bold leading-[25px] tracking-[-0.4px] text-[#4f4f4f] sm:w-3/4 sm:text-[35px] sm:leading-[35px] lg:w-1/2"
+          className="relative -top-px w-full font-serif text-[25px] font-bold leading-[25px] tracking-[-0.4px] text-[#4f4f4f] md:w-3/4 md:text-[35px] md:leading-[35px] lg:w-1/2"
         >
           <span>Veja O que Nossos Pacientes </span>
           <span className="text-[#0066af]">Estão Dizendo</span>
         </EntranceReveal>
 
-        <EntranceReveal effect="fadeInUp" className="w-full sm:hidden">
+        <EntranceReveal effect="fadeInUp" className="w-full md:hidden">
           <TestimonialsCarousel items={mobileTestimonials} itemClassName="basis-full" setApi={setMobileApi} />
         </EntranceReveal>
-        <EntranceReveal effect="fadeInUp" className="hidden w-full sm:block lg:hidden">
+        <EntranceReveal effect="fadeInUp" className="hidden w-full md:block lg:hidden">
           <TestimonialsCarousel items={tabletTestimonials} itemClassName="basis-[calc((100%-18px)/2)]" />
         </EntranceReveal>
         <EntranceReveal effect="fadeInUp" className="hidden w-full lg:block">

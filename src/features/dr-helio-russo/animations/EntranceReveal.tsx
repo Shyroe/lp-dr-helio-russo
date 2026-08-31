@@ -32,7 +32,8 @@ type ObserverPool = {
 }
 
 const observerPools = new Map<string, ObserverPool>()
-const observerRootMargin = '0px 0px -10% 0px'
+// Horizontal margins keep translated entrance elements observable while the viewport is resized.
+const observerRootMargin = '0px 100% -10% 100%'
 
 function observeInView(element: Element, amount: number, callback: () => void) {
   const key = `${amount}:${observerRootMargin}`
@@ -87,6 +88,30 @@ function motionIsDisabled() {
   return mode === 'disabled' || query.get('motion') === 'disabled' || navigator.webdriver
 }
 
+function layoutVisibilityRatio(element: HTMLElement, effect: EntranceEffect) {
+  const rect = element.getBoundingClientRect()
+  let layoutTop = rect.top
+  let layoutHeight = rect.height
+
+  if (effect === 'fadeInUp') {
+    layoutTop -= rect.height
+  } else if (effect === 'zoomIn' && rect.height > 0) {
+    layoutHeight = rect.height / 0.3
+    layoutTop -= (layoutHeight - rect.height) / 2
+  }
+
+  if (layoutHeight <= 0) return 0
+
+  const viewportTop = 0
+  const viewportBottom = window.innerHeight * 0.9
+  const visibleHeight = Math.max(
+    0,
+    Math.min(layoutTop + layoutHeight, viewportBottom) - Math.max(layoutTop, viewportTop)
+  )
+
+  return visibleHeight / layoutHeight
+}
+
 export function EntranceReveal({
   as = 'div',
   effect,
@@ -98,6 +123,7 @@ export function EntranceReveal({
 }: EntranceRevealProps) {
   const [scope, animate] = useAnimate()
   const disabled = motionIsDisabled()
+  const observerAmount = effect === 'fadeInLeft' || effect === 'fadeInRight' ? 0 : amount
 
   isomorphicLayoutEffect(() => {
     const element = scope.current as HTMLElement | null
@@ -113,9 +139,11 @@ export function EntranceReveal({
     if (!element || disabled) return
 
     let played = false
+    let stopObserving: () => void = () => {}
     const play = () => {
       if (once && played) return
       played = true
+      if (once) stopObserving()
 
       const duration = slow ? 2 : 1.25
       const keyframes =
@@ -137,13 +165,22 @@ export function EntranceReveal({
       return
     }
 
-    let stopObserving: () => void = () => {}
-    stopObserving = observeInView(element, amount, () => {
+    stopObserving = observeInView(element, observerAmount, () => {
       play()
-      if (once) stopObserving()
     })
-    return stopObserving
-  }, [amount, animate, disabled, effect, once, scope, slow, trigger])
+
+    const playIfLayoutIsInView = () => {
+      if (!played && layoutVisibilityRatio(element, effect) >= amount) play()
+    }
+
+    playIfLayoutIsInView()
+    window.addEventListener('resize', playIfLayoutIsInView, { passive: true })
+
+    return () => {
+      stopObserving()
+      window.removeEventListener('resize', playIfLayoutIsInView)
+    }
+  }, [amount, animate, disabled, effect, observerAmount, once, scope, slow, trigger])
 
   return React.createElement(as, {
     ...props,

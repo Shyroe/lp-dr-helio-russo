@@ -8,6 +8,8 @@ const systemChromiumCandidates = [
   '/usr/bin/chromium-browser',
 ].filter((candidate): candidate is string => Boolean(candidate))
 const systemChromium = systemChromiumCandidates.find((candidate) => existsSync(candidate))
+const e2ePort = process.env.DR_HELIO_E2E_PORT ?? '4174'
+const e2eBaseUrl = `http://127.0.0.1:${e2ePort}`
 
 export default defineConfig({
   testDir: './e2e',
@@ -18,7 +20,7 @@ export default defineConfig({
   workers: process.env.CI ? 1 : undefined,
   reporter: [['list'], ['html', { outputFolder: '.agent-tmp/playwright/html-report', open: 'never' }]],
   use: {
-    baseURL: 'http://127.0.0.1:4174',
+    baseURL: e2eBaseUrl,
     trace: 'retain-on-failure',
     screenshot: 'only-on-failure',
     video: systemChromium ? 'off' : 'retain-on-failure',
@@ -33,9 +35,9 @@ export default defineConfig({
     },
   ],
   webServer: {
-    command: 'pnpm run build && pnpm exec vite preview --host 127.0.0.1 --port 4174 --strictPort',
-    url: 'http://127.0.0.1:4174',
-    reuseExistingServer: !process.env.CI,
+    command: `pnpm run build && pnpm exec vite preview --host 127.0.0.1 --port ${e2ePort} --strictPort`,
+    url: e2eBaseUrl,
+    reuseExistingServer: false,
     timeout: 120_000,
   },
 })

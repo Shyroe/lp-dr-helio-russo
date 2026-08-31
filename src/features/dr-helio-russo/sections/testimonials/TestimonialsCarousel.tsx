@@ -46,7 +46,7 @@ export function TestimonialsCarousel({
       tabIndex={0}
       data-dr-helio-testimonials-carousel
       className={cn(
-        'mt-[45px] w-full focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#0066af] sm:mt-[46px]',
+        'mt-[45px] w-full focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#0066af] md:mt-[46px]',
         className
       )}
       opts={{

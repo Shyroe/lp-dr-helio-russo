@@ -2,10 +2,17 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "lp-dr-helio-russo",
   "compatibility_date": "2026-07-12",
-  "compatibility_flags": ["nodejs_compat"],
-  "main": "@tanstack/react-start/server-entry",
   "workers_dev": true,
   "preview_urls": true,
+  "routes": [
+    {
+      "pattern": "dr-helio-russo.leonardocamargo.dev.br",
+      "custom_domain": true
+    }
+  ],
+  "assets": {
+    "directory": "./dist/client"
+  },
   "observability": {
     "enabled": true
   }

@@ -1,5 +1,5 @@
 export const drHelioRussoData = {
-  whatsappUrl: 'https://wa.me/5500000000000?text=Ol%C3%A1%2C%20quero%20agendar%20minha%20avalia%C3%A7%C3%A3o.',
+  whatsappUrl: '#',
   hero: {
     eyebrow: 'Dr. Hélio Russo',
     title: 'Tem Vergonha de Sorrir? Isso Pode Acabar Hoje!',
@@ -222,7 +222,7 @@ export const drHelioRussoData = {
         text: 'Ótimo profissional!!. Sempre atencioso e prestativo. Visando sempre o bem estar do paciente. Recomendo!!',
         initial: 'R',
         avatarClass: 'bg-[#8b5a2b]',
-        avatar: null,
+        avatar: '/assets/landing/dr-helio-russo/testimonials/raquel.png',
       },
       {
         name: 'Lara Garcia',
@@ -230,7 +230,7 @@ export const drHelioRussoData = {
         text: 'O Dr Crelio é um ótimo profissional, muito calmo e atencioso, extremamente competente. Salvou meu dente com um tratamento de canal impecável, sem dor! Recomendo de olhos fechados para quem busca um endodontista de confiança em Uberlândia!',
         initial: 'L',
         avatarClass: 'bg-[#b98267]',
-        avatar: null,
+        avatar: '/assets/landing/dr-helio-russo/testimonials/lara.png',
       },
       {
         name: 'daniel Sales Arantes',

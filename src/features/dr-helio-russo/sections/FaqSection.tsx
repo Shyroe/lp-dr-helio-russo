@@ -30,48 +30,49 @@ export function FaqSection() {
   return (
     <section
       aria-labelledby="dr-helio-faq-title"
-      className="min-h-[1230px] bg-[#e8f2fa] px-[30px] pb-[29px] pt-[30px] sm:min-h-0 sm:px-10 sm:pb-0 sm:pt-10 lg:px-20 lg:pb-[2.5px] lg:pt-20"
+      className="bg-[#e8f2fa] px-[30px] pb-[29px] pt-[30px] [contain-intrinsic-size:auto_1170.5px] [content-visibility:auto] md:px-10 md:pb-[10px] md:pt-10 md:[contain-intrinsic-size:auto_1107px] lg:px-20 lg:pb-[15px] lg:pt-20 lg:[contain-intrinsic-size:auto_700px]"
     >
-      <div className="mx-auto grid max-w-[1140px] grid-cols-1 lg:grid-cols-[570px_540px] lg:gap-5">
-        <div className="order-2 mt-10 flex justify-center lg:order-1 lg:mt-0 lg:justify-start">
+      <div className="mx-auto grid max-w-[1140px] grid-cols-1 lg:grid-cols-2 lg:gap-5">
+        <div className="order-2 mt-10 flex min-w-0 items-start justify-center lg:order-1 lg:mt-0 lg:justify-start">
           <EntranceReveal
             as="img"
             effect="fadeInLeft"
             data-dr-helio-faq-image
-            src="/assets/landing/dr-helio-russo/tooth-mirror.png"
+            src="/assets/landing/dr-helio-russo/tooth-mirror.webp"
             alt="Modelo de dente com implante e espelho odontológico"
             width={1080}
             height={1350}
-            className="h-auto w-full max-w-[330px] object-contain sm:max-w-[386.38px] lg:max-w-none lg:w-[570px]"
+            loading="lazy"
+            className="h-auto w-full max-w-none object-contain md:w-[55%] lg:w-full"
           />
         </div>
 
-        <div className="order-1 w-full lg:order-2 lg:w-[540px]">
+        <div className="order-1 min-w-0 w-full lg:order-2 lg:pb-20 xl:w-[540px]">
           <EntranceReveal
             as="h2"
             effect="fadeInUp"
             id="dr-helio-faq-title"
-            className="relative top-[13px] w-full text-center font-serif text-[25px] font-bold leading-[25px] tracking-normal text-[#4f4f4f] sm:top-6 sm:text-[35px] sm:leading-[35px] lg:text-left"
+            className="relative top-[13px] w-full text-center font-serif text-[25px] font-bold leading-[25px] tracking-normal text-[#4f4f4f] md:top-6 md:text-[35px] md:leading-[35px] lg:text-left"
           >
             <span>Perguntas </span>
             <span className="text-[#0066af]">Frequentes</span>
           </EntranceReveal>
 
-          <EntranceReveal effect="fadeInRight">
+          <EntranceReveal effect="fadeInRight" className="w-full">
             <Accordion
               type="single"
               collapsible
               data-dr-helio-faq-accordion
-              className="mt-[55px] flex w-full flex-col gap-[10px] font-[Arial,_sans-serif] sm:mx-[10px] sm:mt-[65px] sm:w-[calc(100%-20px)] lg:mx-0 lg:w-full"
+              className="mt-[55px] flex w-full flex-col gap-[10px] font-[Arial,_sans-serif] md:mx-[10px] md:mt-[65px] md:w-[calc(100%-20px)] lg:mx-0 lg:w-full"
             >
               {faq.items.map((item, index) => (
                 <AccordionItem
                   key={item.question}
                   value={`faq-${index + 1}`}
                   data-dr-helio-faq-item
-                  className="rounded-[20px] border border-[#d9d9d9] bg-white text-black transition-colors duration-[400ms] data-[state=open]:bg-[#0066af] data-[state=open]:text-white"
+                  className="rounded-[20px] border border-[#d9d9d9] bg-white text-black transition-colors duration-[400ms] data-[state=open]:bg-[#004374] data-[state=open]:text-white"
                 >
-                  <AccordionTrigger className="group min-h-[44px] gap-[10px] px-[10px] py-[10px] text-[16px] font-normal leading-[24px] hover:no-underline focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#0066af] data-[state=open]:focus-visible:ring-[#ffdc51]">
+                  <AccordionTrigger className="group min-h-[44px] gap-[10px] px-[10px] py-[10px] text-[16px] font-normal leading-[24px] hover:bg-[#004374] hover:text-white hover:no-underline focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#0066af] data-[state=open]:focus-visible:ring-[#ffdc51]">
                     <AccordionStateIcon />
                     <span className="min-w-0 flex-1">{item.question}</span>
                   </AccordionTrigger>

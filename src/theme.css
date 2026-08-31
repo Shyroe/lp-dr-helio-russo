@@ -25,7 +25,7 @@
   --radius: 0.625rem;
 
   /* Dr Helio Russo landing tokens. Keep component styling in Tailwind utilities; use these variables for reference-accurate values. */
-  --dr-helio-font-body: "Montserrat", sans-serif;
+  --dr-helio-font-body: "Montserrat", "Montserrat Fallback", sans-serif;
   --dr-helio-font-heading: "Fraunces", sans-serif;
   --dr-helio-surface: var(--background);
   --dr-helio-foreground: var(--foreground);

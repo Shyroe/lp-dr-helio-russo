@@ -62,6 +62,31 @@ describe('TestimonialsSection', () => {
     expect(slides.every((slide) => slide.getAttribute('aria-roledescription') === 'slide')).toBe(true)
   })
 
+  it('uses the available local profile photos and preserves initial fallbacks', () => {
+    render(<TestimonialsSection />)
+
+    const raquelAvatars = screen
+      .getAllByRole('article', { name: 'Avaliação de Raquel Velasco' })
+      .map((article) => article.querySelector('[data-dr-helio-review-avatar]'))
+    const laraAvatars = screen
+      .getAllByRole('article', { name: 'Avaliação de Lara Garcia' })
+      .map((article) => article.querySelector('[data-dr-helio-review-avatar]'))
+    const tiberyAvatars = screen
+      .getAllByRole('article', { name: 'Avaliação de Tibery Matinha' })
+      .map((article) => article.querySelector('[data-dr-helio-review-avatar]'))
+
+    expect(raquelAvatars).toHaveLength(3)
+    expect(laraAvatars).toHaveLength(3)
+    expect(tiberyAvatars).toHaveLength(3)
+    expect(raquelAvatars.every((avatar) => avatar?.tagName === 'IMG')).toBe(true)
+    expect(laraAvatars.every((avatar) => avatar?.tagName === 'IMG')).toBe(true)
+    expect(tiberyAvatars.every((avatar) => avatar?.tagName === 'SPAN')).toBe(true)
+    expect(raquelAvatars.every((avatar) => avatar?.getAttribute('src')?.endsWith('/testimonials/raquel.png'))).toBe(
+      true
+    )
+    expect(laraAvatars.every((avatar) => avatar?.getAttribute('src')?.endsWith('/testimonials/lara.png'))).toBe(true)
+  })
+
   it('synchronizes the mobile progress indicator on select and reInit', async () => {
     render(<TestimonialsSection />)
 

@@ -4,6 +4,7 @@ import { cn } from '@/lib/utils'
 import { EntranceReveal } from '../animations/EntranceReveal'
 import { ReferenceTriangleDivider } from '../components/ReferenceTriangleDivider'
 import { drHelioRussoData } from '../data'
+import { ReferenceSvgIcon } from '../generated/reference-svg-icons.generated'
 import { DrHelioIcon } from '../icons'
 
 type SvgPrimitive =
@@ -145,12 +146,23 @@ function renderSvgElement(element: SvgPrimitive, index: number) {
 }
 
 function TreatmentIcon({ icon }: { icon: TreatmentCardProps['icon'] }) {
+  if (icon === 'cleaning' || icon === 'implant') {
+    return (
+      <span
+        aria-hidden="true"
+        className="inline-flex h-[90px] w-[82px] shrink-0 items-start justify-center text-current"
+      >
+        <ReferenceSvgIcon name={icon} className="h-[82px] w-[82px] fill-current" />
+      </span>
+    )
+  }
+
   const definition = treatmentIconDefinitions[icon]
 
   if (!definition) return null
 
   return (
-    <span aria-hidden="true" className="inline-flex h-[95px] w-[82px] shrink-0 items-start justify-center text-current">
+    <span aria-hidden="true" className="inline-flex h-[90px] w-[82px] shrink-0 items-start justify-center text-current">
       <svg
         aria-hidden="true"
         className="h-[82px] w-[82px] fill-current"
@@ -176,25 +188,22 @@ function TreatmentCard({ icon, title, description, index, variant = 'primary', c
         isAccent
           ? 'border-b-[#0066AF] text-[#0066AF] hover:shadow-[0_0_15px_8px_rgba(0,102,175,0.18)]'
           : 'border-b-[#0A3D62] text-[#004374] hover:shadow-[0_0_15px_8px_rgba(0,67,116,0.18)]',
-        'max-[767px]:flex-col max-[767px]:justify-start max-[767px]:text-center',
-        index === 0 && 'max-[767px]:h-[317px]',
-        index === 1 && 'max-[767px]:h-[319px]',
-        index === 2 && 'max-[767px]:h-[349px] sm:h-[155px] lg:h-[177px]',
-        index === 3 && 'max-[767px]:h-[319px]',
-        index === 4 && 'max-[767px]:h-[327px] sm:h-[155px] lg:h-[177px]',
-        index === 5 && 'max-[767px]:h-[298px]',
+        'max-md:flex-col max-md:justify-start max-md:text-center',
+        index === 2 && 'min-[390px]:max-[391px]:h-[348.5px] md:h-[155px] lg:h-auto lg:min-h-[177px]',
+        index === 4 && 'min-[390px]:max-[391px]:h-[327px] md:h-[155px] lg:h-auto lg:min-h-[177px]',
         className
       )}
     >
       <TreatmentIcon icon={icon} />
-      <div className="w-full min-w-0 sm:flex-1">
-        <h3 className="my-2 text-[22px] font-bold leading-[26.4px] tracking-normal text-current max-[767px]:text-[18px] max-[767px]:leading-[21.6px]">
+      <div className="w-full min-w-0 md:flex-1">
+        <h3 className="my-2 text-[22px] font-bold leading-[26.4px] tracking-normal text-current max-md:text-[18px] max-md:leading-[21.6px]">
           {title}
         </h3>
         <p
           className={cn(
-            'text-[14px] font-normal leading-[21px] text-[#545454] max-[767px]:tracking-[-0.2px] sm:max-lg:tracking-[-0.02px]',
-            index === 5 && 'max-[767px]:tracking-[-0.4px]'
+            'text-[14px] font-normal leading-[21px] text-[#545454] max-md:tracking-[-0.2px] md:max-lg:tracking-[-0.02px]',
+            [2, 4].includes(index) && 'max-md:leading-[22.5px] min-[390px]:max-[391px]:leading-[21.2px]',
+            index === 5 && 'max-md:tracking-[-0.4px]'
           )}
         >
           {description}
@@ -211,15 +220,15 @@ export function TreatmentsSection() {
   return (
     <section
       aria-labelledby="dr-helio-treatments-title"
-      className="relative overflow-hidden bg-white px-[30px] pt-[30px] pb-[27px] text-center sm:px-10 sm:pt-10 sm:pb-[35px] lg:px-20 lg:pt-20 lg:pb-[76px]"
+      className="relative overflow-hidden bg-white px-[30px] pt-[30px] pb-[27px] text-center [contain-intrinsic-size:auto_2254px] [content-visibility:auto] md:px-10 md:pt-10 md:pb-[35px] md:[contain-intrinsic-size:auto_1285px] lg:px-20 lg:pt-20 lg:pb-[76px] lg:[contain-intrinsic-size:auto_778px]"
     >
       <ReferenceTriangleDivider position="top" referenceId="elementor-d1ec35f-shape-divider-top-triangle" />
-      <div className="relative -top-[3px] mx-auto flex max-w-[1140px] flex-col items-center sm:-top-[5px] lg:-top-[4px]">
+      <div className="relative -top-[3px] mx-auto flex max-w-[1140px] flex-col items-center md:-top-[5px] lg:-top-[4px]">
         <EntranceReveal
           as="h2"
           effect="fadeInUp"
           id="dr-helio-treatments-title"
-          className="w-full max-w-full font-serif text-[25px] font-bold leading-[25px] tracking-normal text-[#4F4F4F] sm:w-1/2 sm:max-w-[50%] sm:text-[35px] sm:leading-[35px]"
+          className="w-full max-w-full font-serif text-[25px] font-bold leading-[25px] tracking-normal text-[#4F4F4F] md:w-1/2 md:max-w-[50%] md:text-[35px] md:leading-[35px]"
         >
           <span>Nossos </span>
           <span className="text-[#0066AF]">Tratamentos</span>
@@ -259,7 +268,7 @@ export function TreatmentsSection() {
           effect="zoomIn"
           slow={false}
           href={whatsappUrl}
-          className="mt-10 inline-flex h-[60px] w-full items-center justify-center gap-2 whitespace-normal rounded-[0_20px_0_20px] bg-[linear-gradient(360deg,#0066AF_0%,#004374_100%)] px-[15px] py-[15px] text-center text-[15px] font-bold leading-[15px] tracking-normal text-white uppercase shadow-[0_0_23px_-2px_rgba(0,81,140,0.8)] transition hover:-translate-y-0.5 hover:brightness-110 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#ffdc51] sm:mt-[60px] sm:h-[45px] sm:w-[392px] sm:px-10 sm:whitespace-nowrap lg:h-[46px] lg:w-[412px] lg:text-[16px] lg:leading-[16px]"
+          className="mt-10 inline-flex h-[60px] w-full items-center justify-center gap-2 whitespace-normal rounded-[0_20px_0_20px] bg-[linear-gradient(360deg,#0066AF_0%,#004374_100%)] px-[15px] py-[15px] text-center text-[15px] font-bold leading-[15px] tracking-normal text-white uppercase shadow-[0_0_23px_-2px_rgba(0,81,140,0.8)] transition hover:-translate-y-0.5 hover:brightness-110 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#ffdc51] md:mt-[60px] md:h-[45px] md:w-[392px] md:px-10 md:whitespace-nowrap lg:h-[46px] lg:w-[412px] lg:text-[16px] lg:leading-[16px]"
         >
           <span>{cta}</span>
           <DrHelioIcon name="whatsapp" className="size-4 shrink-0" />

@@ -52,7 +52,7 @@ export function ServiceCard({
       data-dr-helio-card="service"
       data-dr-helio-card-tone={tone}
       className={cn(
-        'group min-h-[220px] gap-[10px] rounded-[20px] border-0 border-b-[5px] bg-white px-5 py-5 text-center shadow-[0_0_10px_2px_rgba(0,0,0,0.10)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_8px_20px_rgba(0,52,94,0.16)]',
+        'group gap-[10px] rounded-[20px] border-0 border-b-[5px] bg-white px-5 py-5 text-center shadow-[0_0_10px_2px_rgba(0,0,0,0.10)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_8px_20px_rgba(0,52,94,0.16)]',
         toneClasses.border,
         className
       )}
@@ -64,7 +64,7 @@ export function ServiceCard({
           iconClassName={cn('size-[45px]', iconClassName)}
         />
       </div>
-      <div className="flex flex-col gap-3">
+      <div className="flex flex-col gap-4 md:gap-3">
         <h2
           className={cn(
             'text-[18px] font-bold leading-[21.6px] tracking-[-0.01em] md:text-[22px] md:leading-[26.4px]',
@@ -73,7 +73,7 @@ export function ServiceCard({
         >
           {title}
         </h2>
-        <p className="mx-auto max-w-[18.5rem] text-[14px] font-normal leading-[21px] tracking-[-0.5px] text-[#545454] md:tracking-[-0.4px] lg:tracking-[-0.3px]">
+        <p className="mx-auto max-w-none text-[14px] font-normal leading-[21px] tracking-[-0.6px] text-[#545454] md:max-w-[18.5rem] md:tracking-[-0.4px] lg:tracking-[-0.3px]">
           {description}
         </p>
       </div>

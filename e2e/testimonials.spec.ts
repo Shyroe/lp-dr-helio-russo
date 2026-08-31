@@ -7,6 +7,7 @@ test('navigates the desktop testimonials carousel with accessible controls', asy
   const previous = page.getByRole('button', { name: 'Avaliação anterior' })
   const next = page.getByRole('button', { name: 'Próxima avaliação' })
 
+  await next.scrollIntoViewIfNeeded()
   await expect(previous).toBeDisabled()
   await expect(next).toBeEnabled()
   await next.click()
@@ -19,9 +20,12 @@ test('updates the mobile progress indicator through keyboard navigation', async 
 
   const carousel = page.locator('[data-dr-helio-testimonials-carousel]:visible')
   const progress = page.locator('[data-dr-helio-testimonials-progress] > span')
+  const content = carousel.locator('[data-slot="carousel-content"]')
 
   await expect(carousel).toHaveCount(1)
   await expect(progress).toHaveCSS('transform', 'matrix(1, 0, 0, 1, 75, 0)')
+  await carousel.scrollIntoViewIfNeeded()
+  await expect(content).toHaveAttribute('style', /translate3d/)
   await carousel.focus()
   await page.keyboard.press('ArrowRight')
   await expect(progress).not.toHaveCSS('transform', 'matrix(1, 0, 0, 1, 75, 0)')
