@@ -79,7 +79,7 @@
   "packageManager": "pnpm@11.5.1",
   "description": "Landing page odontológica responsiva construída com TanStack Start, React, TypeScript, Tailwind CSS e Cloudflare Workers.",
   "license": "MIT",
-  "homepage": "https://lp-dr-helio-russo.shyroe.workers.dev/",
+  "homepage": "https://dr-helio-russo.leonardocamargo.dev.br/",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Shyroe/lp-dr-helio-russo.git"

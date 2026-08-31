@@ -6,7 +6,7 @@ Landing page odontológica responsiva construída como projeto de portfólio e e
 
 ## Demonstração
 
-- Produção: https://lp-dr-helio-russo.shyroe.workers.dev/
+- Produção: https://dr-helio-russo.leonardocamargo.dev.br/
 
 ## Stack
 
@@ -33,7 +33,7 @@ Landing page odontológica responsiva construída como projeto de portfólio e e
 - navegação por teclado e suporte a `prefers-reduced-motion`;
 - política Tailwind-first protegida por auditoria automatizada;
 - orçamento de bundle validado no CI;
-- build SSR preparado para Cloudflare Workers.
+- prerenderização estática com entrega via Cloudflare Workers.
 
 ## Estrutura
 
